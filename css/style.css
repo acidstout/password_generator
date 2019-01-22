@@ -1,4 +1,4 @@
-﻿/*
+/*
 	Password Generator
 
 	Supports generating passwords of unlimited length and selectable complexity.
@@ -11,7 +11,7 @@
 
 /* Some global definitions which make it look nice. */
 html, body, * {
-	font-family: "Verdana", sans-serif;
+	font-family: 'Helvetica', 'Verdana', sans-serif;
 	font-size: 9pt;
 }
 
@@ -20,8 +20,7 @@ html, body {
 }
 
 body {
-	background: url(../img/samuel-scrimshaw-114346.jpg) center center fixed no-repeat #fff;
-	background-size: cover;
+	background-color: #555;
 	user-select: none;
 }
 
@@ -48,13 +47,13 @@ input[type=text], textarea, button {
 
 /* Make buttons look nice */
 button {
-	cursor: pointer;
-	padding: 4px 8px;
-	margin-top:4px;
-	text-shadow: 1px 1px 0 #ccc;
-	border:1px solid #dadada;
 	background-color:#f7f7f7;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 -15px 10px -12px rgba(0, 0, 0, 0.05) inset
+	border:1px solid #dadada;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 -15px 10px -12px rgba(0, 0, 0, 0.05) inset;
+	cursor: pointer;
+	margin-top:4px;
+	padding: 4px 8px;
+	text-shadow: 1px 1px 0 #ccc;
 }
 
 button:hover {
@@ -63,22 +62,22 @@ button:hover {
 
 button:active {
 	background-color: #ffd600;
+	box-shadow: 1px 1px 1px #ddd;
 	position:relative;
 	left: 1px;
 	top: 1px;
-	box-shadow: 1px 1px 1px #ddd;
 }
 
 button[disabled], button:active[disabled] {
-	cursor: wait;
 	background-color:#f7f7f7;
-	color: #ccc;
 	box-shadow: 0 0 0 transparent;
+	color: #ccc;
+	cursor: wait;
 }
 
 label {
-	text-shadow: 1px 1px 0 #ccc;
 	display: inline;
+	text-shadow: 1px 1px 0 #ccc;
 }
 
 
@@ -111,21 +110,25 @@ label {
 
 /* Input form field for our password length. Unfortunately this is displayed differently in Firefox and Chromium based browser. */
 #length {
-	width: 48px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 1px 0 1px 2px;
 	text-align: right;
-	background: #fff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAMAAACzvE1FAAAADFBMVEUzMzMzMzMzMzMzMzMKAG/3AAAAA3RSTlMAf4C/aSLHAAAAPElEQVR42q3NMQ4AIAgEQTn//2cLdRKppSGzBYwzVXvznNWs8C58CiussPJj8h6NwgorrKRdTvuV9v16Afn0AYFOB7aYAAAAAElFTkSuQmCC") no-repeat scroll right 4px center / 8px 10px;
-	padding: 0 16px 0 0;
+	width: 48px;
 }
 
 /* Our strength-meter */
 #strength-meter {
-	display: inline-block;
-	position: relative;
-	top: 1px;
-	height: 6px;
-	padding: 1px 2px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
+	display: inline-block;
+	height: 6px;
+	padding: 1px 2px;
+	position: relative;
+	top: 1px;
+	left: 7px;
+	width: 186px;
 }
 
 /* Start position and height of all bars of the strength-meter */
@@ -139,33 +142,34 @@ label {
 
 /* Weak bar is red and occupies just 33% width of the strength-meter */
 #strength-weak {
-	width: 33%;
 	background-color: #f00;
 	border-bottom-left-radius: 4px;
 	border-top-left-radius: 4px;
+	width: 33%;
 }
 
 
 /* Fair bar is yellow and occupies 66% width of the strength-meter */
 #strength-fair {
-	width: 66%;
 	background-color: #ff0;
 	border-bottom-left-radius: 4px;
 	border-top-left-radius: 4px;
+	width: 66%;
 }
 
 
 /* Good bar is green and occupies all width of the strength-bar. Mind the missing 1%, which leaves some space at the right end.
    Otherwise it would touch the surrounding border (not good). */
 #strength-good {
-	width: 99%;
 	background-color: #0f0;
 	border-radius: 4px;
+	width: 99%;
 }
 
 
 /* Width of the input form field where custom characters can be entered */
 #custom {
+	padding: 1px 2px;
 	width: 77%;
 }
 
@@ -186,24 +190,33 @@ ul.inlinelist li {
 }
 
 #box {
-	position:fixed;
-	width:100%;
-	height:100%;
+	position: fixed;
+	height: 100%;
+	width: 100%;
 }
+
+.bg-img {
+	background: url('../img/bg/samuel-scrimshaw-114346.jpg') #555 no-repeat center / cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
 
 /* This contains the title bar and the actual box */
 #outer_box {
-	/* center vertically */
 	position: absolute;
-	
-	/* Does NOT work with JQueryUI's draggable elements. We use ugly JavaScript instead. */
+	display: none;
 	/*
-	top: 50%;
-	margin-top: -150px;
+	   The common margin or transform tricks do NOT work with JQueryUI's draggable elements.
+	   So, instead of CSS positioning we need to use JavaScript.
 	*/
-
+	
 	text-align: left;
 	height: auto;
+	width: 560px;
 	
 	/* Put this behind the #title, because the #title needs to be behind #inner_box in order to have no overlapping shadows. */
 	z-index:-2;
@@ -215,23 +228,23 @@ ul.inlinelist li {
 
 /* The orange title bar of our box */
 #title {
-	position:relative;
-	top:0;
-	left:0;
 	border: 2px solid #ffd600;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
-	background: url(../img/key.png) 2px 1px no-repeat #ffe300;
-	padding:2px 4px 2px 24px;
-	width:130px;
-	cursor:pointer;
+	background: url(../img/key.svg) no-repeat #ffe300 2px 0px / 20px;
+	color:#444;
+	cursor: pointer;
 	font-family: "Tahoma", sans-serif;
 	font-weight:bold;
-	color:#444;
+	padding: 2px 4px 2px 24px;
+	position:relative;
+	top:0;
+	left:0;
 	text-shadow: 1px 1px 2px #ffb600;
+	width: 130px;
 	
 	/* Put this behind #inner_box to have no overlapping shadows. */
-	z-index:-1;
+	z-index: -1;
 }
 
 /* Our box where all the stuff happens */
@@ -247,55 +260,17 @@ ul.inlinelist li {
 /* This is to position the options properly to the #result form field */
 #options {
 	position:relative;
-	left:4px;
-	top:8px;
+	left: 4px;
+	top: 8px;
 }
 
 /* Input form field which will hold the generated password */
 #result {
-	width: 98%;
+	font-size: 12pt;
 	height: 32px;
 	padding: 4px;
-	font-size: 12pt;
 	text-align: center;
-}
-
-/* Add some responsiveness */
-@media (max-width: 595px) { 
-	#outer_box {
-		left: 0;
-		margin-left: 0;
-		width: auto;
-	}
-
-	#strength-meter {
-		left: 0;
-		width: auto;
-		min-width: 50%;
-	}
-	
-	ul.inlinelist, ul.inlinelist li {
-		display: block;
-	}
-}
-
-
-@media (min-width: 596px) {
-	#outer_box {
-		/* center horizontally */
-		
-		/* Does NOT work with JQueryUI's draggable elements. We use ugly JavaScript instead. */
-		/*
-		left: 50%;
-		margin-left: -280px;
-		*/
-		width: 560px;
-	}
-	
-	#strength-meter {
-		left: 7px;
-		width: 186px;
-	}
+	width: calc(100% - 6px);
 }
 
 
@@ -310,10 +285,10 @@ ul.inlinelist li {
 .regular-checkbox + label {
 	background-color: #fafafa;
 	border: 1px solid #cacece;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0 -15px 10px -12px rgba(0,0,0,0.05);
-	padding: 6px;
 	border-radius: 3px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0 -15px 10px -12px rgba(0,0,0,0.05);
 	display: inline-block;
+	padding: 6px;
 	position: relative;
 	top:2px;
 }
@@ -330,10 +305,34 @@ ul.inlinelist li {
 }
 
 .regular-checkbox:checked + label:after {
+	color: #99a1a7;
 	content: '\2714';
 	font-size: 14px;
 	position: absolute;
 	top: -3px;
 	left: 0;
-	color: #99a1a7;
+}
+
+
+/* Add some responsiveness */
+@media (max-width: 595px) { 
+	#outer_box {
+		left: 0;
+		margin-left: 0;
+		width: auto;
+	}
+
+	#strength-meter {
+		left: 0;
+		min-width: 50%;
+		width: auto;
+	}
+	
+	ul.inlinelist, ul.inlinelist li {
+		display: block;
+	}
+	
+	#result {
+		font-size: 9pt;
+	}
 }

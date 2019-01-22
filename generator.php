@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * 
  * Password Generator
@@ -13,6 +13,15 @@
 // Die if request doesn't identify as AJAX request.
 if (!isset($_POST['ajax']) || empty($_POST['ajax'])) {
 	die('Missing parameter!');
+}
+
+
+// Select a random background image.
+if (isset($_POST['bg']) && !empty($_POST['bg'])) {
+	$files = glob('img/bg/*.*');
+	$file = array_rand($files);
+	echo $files[$file];
+	die();
 }
 
 
@@ -411,4 +420,3 @@ function checkPasswordStrength($password, $chartypes) {
 	
 	return $ret;
 }// END: checkPasswordStrength()
-?>

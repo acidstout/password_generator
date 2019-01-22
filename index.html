@@ -1,4 +1,4 @@
-﻿<!-- 
+<!-- 
 
 	Password Generator
 
@@ -15,7 +15,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link type="image/x-icon" rel="shortcut icon" href="img/favicon.ico"/>
+		<link type="image/svg+xml" rel="shortcut icon" href="img/key.svg"/>
 		
 		<!-- Reset style -->
 		<link type="text/css" rel="stylesheet" href="css/reset.css"/>
@@ -26,17 +26,19 @@
 		<!-- Set of glyphicons (e.g. the ones on the buttons) -->
 		<link type="text/css" rel="stylesheet" href="css/glyphicon.css"/>
 		
-		<!-- Load JQuery and JQuery UI from Google CDN. For additional security and independence put these on your own server. -->
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<!-- Load JQuery UI style. -->
+		<link rel="stylesheet" href="css/jquery-ui.css">
 		<title>Password Generator</title>
 	</head>
 	<body>
+		<div id="bg1" class="bg-img"></div>
+		<div id="bg2" class="bg-img"></div>
 		<div id="box">
 			<div id="outer_box">
 				<div id="title">Password Generator</div>
 				<div id="inner_box">
 					<form id="generator" action="#" method="post">
-						<input type="text" id="result" name="result" value="" placeholder="Enter a password to check or click Generate" onfocus="this.select();"/>
+						<input type="text" id="result" value="" placeholder="Enter a password to check or click Generate" onfocus="this.select();"/>
 						<br/>
 						<div id="options">
 							<ul class="inlinelist" title="By default the characters l, I, O, 1, 0 will be left out, due to being too similar.">
@@ -52,16 +54,7 @@
 							</ul>
 							<br/> 
 							<div id="left">
-								<label for="length">Length</label> <input type="text" id="length" name="length" list="length-select" value="" maxlength="3" placeholder="10" onfocus="this.select();"/> <label for="length">characters</label>
-								<datalist id="length-select">
-									<option>6</option>
-									<option>8</option>
-									<option>10</option>
-									<option>12</option>
-									<option>14</option>
-									<option>16</option>
-									<option>18</option>
-								</datalist>
+								<label for="length">Length</label> <input type="number" id="length" name="length" min="4" value="10" placeholder="10" onfocus="this.select();"/> <label for="length">characters</label>
 							</div>
 							<div id="right">
 								<label for="strength">Strength</label> 
@@ -84,8 +77,8 @@
 				</div>
 			</div>
 		</div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
 		<script src="js/ajax.js"></script>
 	</body>
 </html>

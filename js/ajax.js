@@ -46,7 +46,7 @@ function resetOptions() {
  * @returns void
  */
 function randomImage() {
-	var duration = 500;
+	var duration = 1500;
 	$.ajax({
 		type: 'post',
 		url: 'generator.php',
@@ -135,7 +135,7 @@ $(function() {
 	var randomBackgroundImageInterval = setInterval(function() {
 		randomImage();
 		return false;
-	}, 5000);
+	}, 10000);
 	
 	// Handle clicks on the Generate button
 	$('#generate').click(function() {

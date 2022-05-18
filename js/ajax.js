@@ -28,13 +28,16 @@ function centerBox() {
  * @returns false
  */
 function resetOptions() {
-	$('#length').val('10');
+	$('#length').val('32');
 	$('#result').val('');
 	$('#custom').val('');
+	$('#lowercase').prop('checked', true);
+	$('#uppercase').prop('checked', true);
+	$('#numbers').prop('checked', true);
 	$('#symbols').prop('checked', false);
-	$('#similar').prop('checked', false);
+	$('#similar').prop('checked', true);
 	$('#dashes').prop('checked', false);
-	$('#mandatory').prop('checked', false);
+	$('#mandatory').prop('checked', true);
 	$('.strength').hide();
 	return false;
 }

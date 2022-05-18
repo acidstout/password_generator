@@ -1,4 +1,8 @@
 # Changes
+### 1.2
+- New default settings for securer passwords.
+- Fixed button texts being selectable.
+
 ### 1.1
 - Added changelog and credits.
 - Added new background images and made them fade in and out.

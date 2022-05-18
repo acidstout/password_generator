@@ -28,13 +28,16 @@ function centerBox() {
  * @returns false
  */
 function resetOptions() {
-	$('#length').val('10');
+	$('#length').val('32');
 	$('#result').val('');
 	$('#custom').val('');
+	$('#lowercase').prop('checked', true);
+	$('#uppercase').prop('checked', true);
+	$('#numbers').prop('checked', true);
 	$('#symbols').prop('checked', false);
-	$('#similar').prop('checked', false);
+	$('#similar').prop('checked', true);
 	$('#dashes').prop('checked', false);
-	$('#mandatory').prop('checked', false);
+	$('#mandatory').prop('checked', true);
 	$('.strength').hide();
 	return false;
 }
@@ -46,7 +49,7 @@ function resetOptions() {
  * @returns void
  */
 function randomImage() {
-	var duration = 500;
+	var duration = 1500;
 	$.ajax({
 		type: 'post',
 		url: 'generator.php',
@@ -135,7 +138,7 @@ $(function() {
 	var randomBackgroundImageInterval = setInterval(function() {
 		randomImage();
 		return false;
-	}, 5000);
+	}, 10000);
 	
 	// Handle clicks on the Generate button
 	$('#generate').click(function() {

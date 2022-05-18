@@ -57,7 +57,7 @@ if (isset($_POST['similar']) && !empty($_POST['similar'])) {
 if (isset($_POST['length']) && !empty($_POST['length']) && is_numeric($_POST['length'])) {
 	$length = $_POST['length'];
 } else {
-	$length = 16;
+	$length = 32;
 }
 
 // Add dashes option
@@ -301,7 +301,7 @@ function addCustomChars($custom, $sets) {
  * @param boolean $mandatory - Flag to toggle chosen sets mandatory.
  * @return array
  */
-function generateStrongPassword($length = 16, $add_dashes = false, $sets = array(), $chartypes = array(), $mandatory = false) {
+function generateStrongPassword($length = 32, $add_dashes = false, $sets = array(), $chartypes = array(), $mandatory = false) {
 	global $chartypes_all; // Ugh! Globals in functions make me shiver.
 	
 	// Shuffle the order of sets for additional randomness.
@@ -410,7 +410,7 @@ function checkPasswordStrength($password, $chartypes) {
 	$strength = numCharTypes($password, $chartypes);
 	
 	// Set return value according to length and calculated strength
-	if ($length >= 12 && $strength >= count($chartypes)) {
+	if ($length >= 16 && $strength >= count($chartypes)) {
 		$ret = 'good';
 	} else if ($length >= 8 && $strength >= count($chartypes) - 1) {
 		$ret = 'fair';

@@ -1,6 +1,9 @@
 # Changes
+### 1.2.1
+- Fixed strength check not working anymore.
+
 ### 1.2
-- New default settings for securer passwords.
+- New default settings for more secure passwords.
 - Fixed button texts being selectable.
 
 ### 1.1
